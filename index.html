@@ -19,7 +19,7 @@
 </head>
 <body>
 <div class="container">
-<form id="sendForReviewForm" method="post" action="#">
+<!-- <form id="sendForReviewForm" > -->
 	<div class="row">
 		<div class="col-md-6 col-sm-12">
 		 <label>Select Reviewers
@@ -27,47 +27,98 @@
 		      
 		    </select>
 		  </label>
-		  
+		  <div>
+		  <label for="messageForRevivers">Message</label>
+		  <textarea id="messageForRevivers"></textarea>
+		  </div>
 		</div>
 		<div class="col-md-6 col-sm-12">
 			<label>Select Approvers
 		    <select multiple id="select2">
-		      <option value="0">Zero</option>
-		      <option value="1">One</option>
-		      <option value="2">Two</option>
-		      <option value="3">Three</option>
-		      <option value="4">Four</option>
+		      
 		    </select>
 		  </label>
+		   <div>
+			  <label for="messageForApprovers">Message</label>
+			  <textarea id="messageForApprovers"></textarea>
+		  </div>
 		</div>
 
 		<button class="btn btn-large" id="btnSendForReview">Send</button>
 	</div><!--/.row main-->
-</form>
+<!-- </form> -->
 </div><!--/.container-->
 <script>
 $(function() {
 
-$("#select1").selectize({
+
+var data, data2;
+var selected = $("#select1").selectize({
 	delimiter:',',
 	
 	options: [{id:1, title:'Sam'},{id:2, title:'Alice'}],
 	valueField:'id',
 	labelField:'title',
-	 searchField: 'title',
-	 sortField:'title'
-
-});
-    
+	searchField: 'title',
+	sortField:'title',
+	// onChange: function(value){
+	// 	data = value;
+	// }
 	
-	$('#select2').selectize({});
+});
+var selectedApprovers = $("#select2").selectize({
+	delimiter:',',
+	
+	options: [{id:93, title:'Bill'},{id:21, title:'Julie'},{id:23, title:'Alex'}],
+	valueField:'id',
+	labelField:'title',
+	searchField: 'title',
+	sortField:'title',
+	// onChange: function(value){
+	// 	data = value;
+	// }
+	
+});
+
+selected;
+selectedApprovers;
+var selectizeReviewers =selected[0].selectize;
+var selectizeApprovers = selectedApprovers[0].selectize;
+//data = $("#select1").data("selected",selected );
+data=selected[0].selectize.options;
+data2=selectedApprovers[0].selectize.options;
+// var selectedNumber = $.map(data,function(value,index){
+// 		return [value];
+// 	})	
+var arrSelectedRevievers=[];
+var arrSelectedApprovers=[];
+selectizeReviewers.on('change',function(){
+	var current=selectizeReviewers.getValue();
+	for(var i =0; i < current.length; i++){
+		arrSelectedRevievers[i] = selectizeReviewers.options[ current[i] ];
+	}
+  
+	//mydata = selectize.options[ current ];
+ })
+
+selectizeApprovers.on('change',function(){
+	//data2=selectizeApprovers.getValue();
+	var current=selectizeApprovers.getValue();
+	for(var i =0; i < current.length; i++){
+		arrSelectedApprovers[i] = selectizeApprovers.options[ current[i] ];
+	}
+	
+})
+
+
+
+$("#btnSendForReview").on('click',function(){
+
+  //alert(selectedNumber);
+  console.log(arrSelectedRevievers,arrSelectedApprovers);
 
  });
- //var selectizeControl = $select[0].selectize;
-
- //selectizeControl.on('change', function(){
- //	var test = selectize.getValue();
- //	alert (test);
+  });
 
 </script>
 </body>
