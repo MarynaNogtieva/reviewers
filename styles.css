@@ -4,7 +4,8 @@ body{
 	box-sizing: border-box;
 }
 .header{
-	background:rgb(17,24,124);
+	background:#020963;
+
 	color:#fff;
 }
 
@@ -17,6 +18,14 @@ body{
 	color:#888;
 	min-height:150px;
 }
+
+div.btnWrap{
+	margin-top:7%;
+}
+
 #btnSendForReview{
 	float:right;
+	margin-top:3%;
+	font-size:1.2em;
 }
+

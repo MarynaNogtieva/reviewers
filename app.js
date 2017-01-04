@@ -62,9 +62,31 @@ selectizeApprovers.on('change',function(){
 
 
 $("#btnSendForReview").on('click',function(){
-
+if(arrSelectedRevievers.length == 0 && arrSelectedApprovers.length ==0 ){
+	alert("you must select either approver or reviewer");
+}
+else if(arrSelectedRevievers.length >0 && arrSelectedApprovers.length ==0){
+  if(document.getElementById("messageForRevivers").value==""){
+  	alert("please write a message for reviewer(s)");
+  }
+}
+else if( arrSelectedApprovers.length > 0 &&  arrSelectedRevievers.length ==0){
+  if(document.getElementById("messageForApprovers").value==""){
+  	alert("please write a message for approver(s)");
+  }
+}
+else if( arrSelectedApprovers.length > 0 &&  arrSelectedRevievers.length > 0){
+	if(document.getElementById("messageForApprovers").value=="" || document.getElementById("messageForRevivers").value==""){
+  	alert("please write a message for approver(s) and reviewer(s)");
+  }
+}
   //alert(selectedNumber);
-  console.log(arrSelectedRevievers,arrSelectedApprovers);
+  else{
+    
+
+  	  console.log(arrSelectedRevievers,arrSelectedApprovers);
+  }
+
 
  });
   });
